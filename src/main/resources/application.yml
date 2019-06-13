@@ -1,0 +1,20 @@
+spring:
+   application:
+     name: inventory-service
+   datasource:
+     type: com.zaxxer.hikari.HikariDataSource
+     driver-class-name: com.mysql.cj.jdbc.Driver
+     url: jdbc:mysql://us-cdbr-iron-east-02.cleardb.net/ad_bbe05af67cc9100
+     username: ${vcap.services.mydb.username:}
+     password: ${vcap.services.mydb.password:}
+   cloud:
+      discovery:
+          enabled: false
+   jpa:
+     database-platform: org.hibernate.dialect.MySQL5Dialect
+     hibernate:
+           ddl-auto: update
+
+
+server:
+   port: 8712

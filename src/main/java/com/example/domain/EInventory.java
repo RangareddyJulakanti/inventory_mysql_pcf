@@ -10,9 +10,9 @@ public class EInventory implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="ID")
     private Integer id;
-    @Column(name="ITEM_NAME")
+    @Column(name="ITM_NM")
     private String itemName;
-    @Column(name="CATEGORY")
+    @Column(name="CAGRY_NM")
     private String category;
 
     public Integer getId() {

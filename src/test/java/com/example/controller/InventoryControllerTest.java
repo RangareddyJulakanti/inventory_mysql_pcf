@@ -28,6 +28,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
@@ -52,12 +53,14 @@ public class InventoryControllerTest {
         inventory.setItemName("Prevencia");
         inventory.setCategory("Lens");
         inventory.setId(1);
-
+        String given=new ObjectMapper().writeValueAsString(inventory);
         when(inventoryService.getAll()).thenReturn(Arrays.asList(inventory));
-        mockMvc.perform(get("/inventory/all")
+       MvcResult result= mockMvc.perform(get("/inventory/all")
                 .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andDo(print())
-                .andExpect(status().is2xxSuccessful());
+               .andExpect(content().json(given))
+                .andExpect(status().is2xxSuccessful()).andReturn();
+
     }
     @Test
     public void testSave() throws Exception {
